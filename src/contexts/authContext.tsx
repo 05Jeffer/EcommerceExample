@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Datos estáticos de usuario
+  
   const staticUsers = [
     {
       id: 1,
@@ -28,17 +28,17 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   ];
 
-  // Verificar autenticación al cargar
+  
   useEffect(() => {
     const verifyAuth = () => {
       const storedToken = localStorage.getItem('token');
       
       if (storedToken) {
         try {
-          // Decodificar el token mock (en realidad deberías validarlo con tu backend)
+        
           const decoded = JSON.parse(atob(storedToken));
           
-          // Verificar expiración (simulada)
+         
           if (decoded.expiresIn > Date.now()) {
             const foundUser = staticUsers.find(u => u.id === decoded.userId);
             if (foundUser) {
@@ -85,7 +85,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const register = async (name: string, email: string, password: string) => {
     setIsLoading(true);
     try {
-      // Verificar si el email ya existe
       if (staticUsers.some(u => u.email === email)) {
         throw new Error('El email ya está registrado');
       }
